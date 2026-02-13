@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: customer_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ..                         # ← build from parent dir (multi-module root)
+      dockerfile: customer-service/Dockerfile.dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ..:/app                           # Mount whole project (code + poms)
+      - /app/customer-service/target      # Don't let host overwrite container's target
+      - maven-repo:/root/.m2              # Cache maven deps
+    working_dir: /app
+    command: mvn -pl customer-service spring-boot:run   # can override if needed
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev,default
+      - JAVA_TOOL_OPTIONS=-Dspring.devtools.restart.enabled=true -Dspring.devtools.restart.log-condition-evaluation-delta=false
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  maven-repo:
