@@ -25,20 +25,6 @@ public class RestExceptionHandler {
         return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler({
-            AlreadyExistsException.class,
-    })
-    public ResponseEntity<ApiResponseError> notFoundException(RuntimeException ex) {
-        ApiResponseError apiError = ApiResponseError
-                .builder()
-                .timestamp(LocalDateTime.now())
-                .code(HttpStatus.NOT_FOUND.value())
-                .status(HttpStatus.NOT_FOUND.name())
-                .errors(List.of(ex.getMessage()))
-                .build();
-        return new ResponseEntity<>(apiError, HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(AlreadyExistsException.class)
     public ResponseEntity<ApiResponseError> handleAlreadyExistsException(AlreadyExistsException ex) {
 
@@ -68,9 +54,18 @@ public class RestExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST.name())
                 .errors(errorList)
                 .build();
-        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ApiResponseError> handleNotFoundException(NotFoundException ex) {
+        ApiResponseError apiError = ApiResponseError.builder()
+                .timestamp(LocalDateTime.now())
+                .code(HttpStatus.NOT_FOUND.value())
+                .status(HttpStatus.NOT_FOUND.getReasonPhrase())
+                .errors(List.of(ex.getMessage()))
+                .build();
 
-
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
 }

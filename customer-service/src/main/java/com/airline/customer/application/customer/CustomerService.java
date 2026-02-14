@@ -8,6 +8,7 @@ import com.airline.customer.infraestructure.dtos.CustomerDto;
 import com.airline.customer.repository.ICustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,12 +17,14 @@ import java.util.Optional;
 public class CustomerService {
 
     private final ICustomerRepository customerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     Logger logger
             = LoggerFactory.getLogger(LogbackServiceProvider.class);
 
-    public CustomerService(ICustomerRepository customerRepository) {
+    public CustomerService(ICustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public CustomerResponseDTO createCustomer (CustomerDto customerDTO) throws Exception {
@@ -32,14 +35,13 @@ public class CustomerService {
             System.out.println(existingCustomer);
             if (existingCustomer.isPresent()) {
                 throw new AlreadyExistsException("Customer already exists.");
-
             }
 
             Customer customer = new Customer();
             customer.setFirstName(customerDTO.getFirstName());
             customer.setLastName(customerDTO.getLastName());
             customer.setEmail(customerDTO.getEmail());
-            customer.setPassword(customerDTO.getPassword());
+            customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
             customer.setPhoneNumber(customerDTO.getPhoneNumber());
 
             Customer savedCustomer = customerRepository.save(customer);
@@ -52,9 +54,9 @@ public class CustomerService {
             responseDTO.setPhoneNumber(savedCustomer.getPhoneNumber());
 
             return responseDTO;
-        } catch (Exception e) {
-            logger.error("Error to create customer: {}", e.getMessage());
-            throw e;
+        } catch (Exception error) {
+            logger.error("Error to create customer: {}", error.getMessage());
+            throw error;
         }
     }
 }
