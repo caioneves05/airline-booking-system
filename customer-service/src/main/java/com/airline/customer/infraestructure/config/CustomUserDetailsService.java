@@ -1,4 +1,4 @@
-package com.airline.customer.config;
+package com.airline.customer.infraestructure.config;
 
 import com.airline.customer.repository.ICustomerRepository;
 import org.springframework.security.core.userdetails.UserDetails;

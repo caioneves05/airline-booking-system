@@ -1,4 +1,4 @@
-package com.airline.customer.config;
+package com.airline.customer.infraestructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
