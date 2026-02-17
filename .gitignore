@@ -74,6 +74,15 @@ application-local.yaml
 .env.*.local
 *.env
 
+# Semantic Release
+release.config.js
+.releaserc.json
+
+# Node.js
+node_modules/
+package-lock.json
+package.json
+
 # Docker
 docker-compose.override.yml
 .docker/
