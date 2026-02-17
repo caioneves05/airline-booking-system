@@ -1,11 +1,13 @@
 package com.airline.customer.dto;
 
 import com.airline.customer.domain.Customer;
+
 import com.airline.customer.domain.CustomerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,9 +20,9 @@ public class CustomerResponseDTO {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     private String passportNumber;
-    private LocalDateTime passportExpiry;
+    private LocalDate passportExpiry;
     private String passportCountry;
     private CustomerStatus status;
     private boolean emailVerified;
@@ -33,9 +35,9 @@ public class CustomerResponseDTO {
         this.firstName = customer.getFirstName();
         this.lastName = customer.getLastName();
         this.phoneNumber = customer.getPhoneNumber();
-        this.dateOfBirth = customer.getDateOfBirth().atStartOfDay();
+        this.dateOfBirth = customer.getDateOfBirth();
         this.passportNumber = customer.getPassportNumber();
-        this.passportExpiry = customer.getPassportExpiry().atStartOfDay();
+        this.passportExpiry = customer.getPassportExpiry();
         this.passportCountry = customer.getPassportCountry();
         this.status = customer.getStatus();
         this.emailVerified = customer.isEmailVerified();
