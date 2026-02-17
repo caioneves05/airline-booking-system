@@ -1,8 +1,0 @@
-I have added `node_modules/` to your `.gitignore` file.
-
-Regarding `package.json` and `package-lock.json`, it is generally not recommended to add these files to `.gitignore` in a Node.js project.
-
-*   `package.json` contains project metadata, scripts, and a list of dependencies. It's essential for defining your project and allowing others to understand and set it up.
-*   `package-lock.json` (or `npm-shrinkwrap.json` for older npm versions) locks down the exact versions of all dependencies, ensuring consistent installations across different environments.
-
-Ignoring these files would make it very difficult for other developers to install the correct dependencies and set up the project. Are you sure you want to ignore `package.json` and `package-lock.json`, and if so, could you please explain your use case?
