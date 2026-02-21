@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/caioneves05/airline-booking-system/compare/v1.0.0...v1.1.0) (2026-02-21)
+
+
+### Features
+
+* jwt service and spring security routes without auth ([1aecdb6](https://github.com/caioneves05/airline-booking-system/commit/1aecdb6b1284fb29732f0dbb11bcafafd5b74f15))
+
 # 1.0.0 (2026-02-17)
 
 
