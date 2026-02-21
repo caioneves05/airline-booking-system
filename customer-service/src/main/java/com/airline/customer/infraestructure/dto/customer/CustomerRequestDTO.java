@@ -1,4 +1,4 @@
-package com.airline.customer.infraestructure.dtos;
+package com.airline.customer.infraestructure.dto.customer;
 
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerDto {
+public class CustomerRequestDTO {
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")

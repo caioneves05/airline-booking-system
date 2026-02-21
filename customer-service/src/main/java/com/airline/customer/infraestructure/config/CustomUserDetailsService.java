@@ -1,6 +1,6 @@
 package com.airline.customer.infraestructure.config;
 
-import com.airline.customer.repository.ICustomerRepository;
+import com.airline.customer.infraestructure.repository.ICustomerRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

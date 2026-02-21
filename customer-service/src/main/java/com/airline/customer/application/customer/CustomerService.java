@@ -2,10 +2,10 @@ package com.airline.customer.application.customer;
 
 import ch.qos.logback.classic.spi.LogbackServiceProvider;
 import com.airline.customer.domain.Customer;
-import com.airline.customer.dto.CustomerResponseDTO;
+import com.airline.customer.infraestructure.dto.customer.CustomerResponseDTO;
 import com.airline.customer.exceptions.AlreadyExistsException;
-import com.airline.customer.infraestructure.dtos.CustomerDto;
-import com.airline.customer.repository.ICustomerRepository;
+import com.airline.customer.infraestructure.dto.customer.CustomerRequestDTO;
+import com.airline.customer.infraestructure.repository.ICustomerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -27,7 +27,7 @@ public class CustomerService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public CustomerResponseDTO createCustomer (CustomerDto customerDTO) throws Exception {
+    public CustomerResponseDTO createCustomer (CustomerRequestDTO customerDTO) throws Exception {
         try {
 
             Optional<Customer> existingCustomer = customerRepository.findByEmail(customerDTO.getEmail());

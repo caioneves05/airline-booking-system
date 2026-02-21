@@ -1,4 +1,4 @@
-package com.airline.customer.dto;
+package com.airline.customer.infraestructure.dto.customer;
 
 import com.airline.customer.domain.Customer;
 

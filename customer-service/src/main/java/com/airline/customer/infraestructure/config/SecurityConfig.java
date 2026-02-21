@@ -19,15 +19,17 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
 
+
     public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/customers/create")
-                        .permitAll().anyRequest().authenticated())
+        http.csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests(request -> request
+                .requestMatchers("/api/customers/create", "/api/customers/auth/login")
+                        .permitAll()
+                .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider());
         return http.build();

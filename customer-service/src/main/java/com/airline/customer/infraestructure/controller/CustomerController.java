@@ -1,17 +1,16 @@
 package com.airline.customer.infraestructure.controller;
 
 import com.airline.customer.application.customer.CustomerService;
-import com.airline.customer.dto.CustomerResponseDTO;
-import com.airline.customer.infraestructure.dtos.CustomerDto;
+import com.airline.customer.infraestructure.dto.customer.CustomerResponseDTO;
+import com.airline.customer.infraestructure.dto.customer.CustomerRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
 
@@ -21,8 +20,8 @@ public class CustomerController {
         this.createCustomerUseCase = createCustomerUseCase;
     }
 
-    @PostMapping("create")
-    public ResponseEntity<CustomerResponseDTO> createCustomer(@RequestBody @Valid CustomerDto customerDTO) throws Exception {
+    @PostMapping("/create")
+    public ResponseEntity<CustomerResponseDTO> createCustomer(@RequestBody @Valid CustomerRequestDTO customerDTO) throws Exception {
         return ResponseEntity.ok(createCustomerUseCase.createCustomer(customerDTO));
     }
 }

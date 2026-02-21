@@ -1,4 +1,4 @@
-package com.airline.customer.repository;
+package com.airline.customer.infraestructure.repository;
 
 import com.airline.customer.domain.Customer;
 import com.airline.customer.domain.CustomerStatus;
