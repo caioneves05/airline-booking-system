@@ -1,0 +1,18 @@
+spring:
+  jwt:
+    secret: 9f8a7c2b1e4d6f3a9c2e8b7d1f4a6c9e8d7b2f1a3c5e9d4b6a7f8c2e1d
+  docker:
+    compose:
+      file: customer-service/compose.yml
+  datasource:
+    url: jdbc:postgresql://localhost:5433/customer_db
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
