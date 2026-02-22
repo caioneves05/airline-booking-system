@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/caioneves05/airline-booking-system/compare/v1.1.0...v1.1.1) (2026-02-22)
+
+
+### Bug Fixes
+
+* gitignore ([d296201](https://github.com/caioneves05/airline-booking-system/commit/d2962018696403b68d0d56e3153530201cc76890))
+
 # [1.1.0](https://github.com/caioneves05/airline-booking-system/compare/v1.0.0...v1.1.0) (2026-02-21)
 
 
